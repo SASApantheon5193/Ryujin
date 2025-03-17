@@ -5,21 +5,21 @@
     "data": {
       "commands": [
         {
-          "type": "path",
-          "data": {
-            "pathName": "Blue Forward"
-          }
-        },
-        {
           "type": "named",
           "data": {
-            "name": "score"
+            "name": "armstart"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Blue Back"
+            "pathName": "2 to reef"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.0
           }
         }
       ]

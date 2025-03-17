@@ -21,10 +21,11 @@ import edu.wpi.first.wpilibj.smartdashboard.MechanismLigament2d;
 import edu.wpi.first.wpilibj.smartdashboard.MechanismRoot2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.FunctionalCommand;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Configs;
 import frc.robot.Constants.CoralSubsystemConstants;
 import frc.robot.Constants.CoralSubsystemConstants.ArmSetpoints;
@@ -39,7 +40,8 @@ public class CoralSubsystem extends SubsystemBase {
     kLevel1,
     kLevel2,
     kLevel3,
-    kLevel4;
+    kLevel4,
+    Autoarmposition;
   }
 
   // Initialize arm SPARK. We will use MAXMotion position control for the arm, so we also need to
@@ -224,6 +226,10 @@ public class CoralSubsystem extends SubsystemBase {
               armCurrentTarget = ArmSetpoints.kLevel4;
               elevatorCurrentTarget = ElevatorSetpoints.kLevel4;
               break;
+            case Autoarmposition:
+              armCurrentTarget = ArmSetpoints.kAutoArmStart;
+              elevatorCurrentTarget = ElevatorSetpoints.kFeederStation;
+              break;
           }
         });
   }
@@ -246,7 +252,27 @@ public class CoralSubsystem extends SubsystemBase {
         () -> this.setIntakePower(IntakeSetpoints.kReverse), () -> this.setIntakePower(0.0));
   }
 
+  public Command autoArmStart() {
+    return setSetpointCommand(Setpoint.kFeederStation);
+  }
 
+  public Command revAutoIntakeCommand() {
+    return new InstantCommand(() -> this.setIntakePower(IntakeSetpoints.kForward));
+  }
+
+  public Command revAutoIntakeStopCommand() {
+    return new InstantCommand(() -> this.setIntakePower(IntakeSetpoints.kstop));
+  }
+
+  public Command autoScorePos() {
+    return setSetpointCommand(Setpoint.kLevel2);
+  }
+
+  public Command autoClearCoral() {
+    return setSetpointCommand (Setpoint.kLevel4);
+  }
+
+  
   @Override
   public void periodic() {
     moveToSetpoint();

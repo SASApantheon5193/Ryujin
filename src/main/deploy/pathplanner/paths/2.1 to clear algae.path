@@ -1,0 +1,54 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 5.694159836065573,
+        "y": 4.019006147540983
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 5.703909836065572,
+        "y": 4.321256147540983
+      },
+      "isLocked": false,
+      "linkedName": "2.1 to reef end"
+    },
+    {
+      "anchor": {
+        "x": 5.908499999999999,
+        "y": 4.0835
+      },
+      "prevControl": {
+        "x": 5.882328803870489,
+        "y": 3.8348736367696485
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "2.1 to clear algae"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 2.0,
+    "maxAcceleration": 2.0,
+    "maxAngularVelocity": 200.0,
+    "maxAngularAcceleration": 200.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 0.0
+  },
+  "reversed": false,
+  "folder": null,
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 0.0
+  },
+  "useDefaultConstraints": true
+}
